@@ -19,9 +19,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - run:
-          name: "Instance_PublicIp_inventory"
-          command: "aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:Project,Values=udacity" --output text >> inventory"
+      - run: "aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:Project,Values=udacity" --output text >> inventory"
 
 workflows:
   say-hello-workflow:
