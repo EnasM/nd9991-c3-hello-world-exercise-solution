@@ -207,27 +207,36 @@ jobs:
           #  aws cloudformation delete-stack --stack-name stack-create-bucket-${CIRCLE_WORKFLOW_ID:0:7}
           #  aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
 
-
+  savePublicIdtoCache:
+      docker:
+        -image: circleci/node:13.8.0
+      steps:
+        -run: 
+          -name: "write Instance PublicIp to inventory file"
+          -command: aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:Project,Values=udacity" --output text >> inventory
 
 workflows:
   # Name the workflow "welcome"
   my_workflow:
     # Run the welcome/run job in its own container
     jobs:
-      # - welcome/run
-      - print_greetings
-      - upload_file
-      - download_file:
-          requires:
-            - upload_file
-      - create_infrastructure
-      - configure_infrastructure
-      - create_and_deploy_front_end
-      - promote_to_production:
-          requires: 
-            - create_and_deploy_front_end
-      - get_last_deployment_id
-      - clean_up_old_front_end:
-          requires:
-            - get_last_deployment_id
-            - promote_to_production
+      # # - welcome/run
+      # - print_greetings
+      # - upload_file
+      # - download_file:
+      #     requires:
+      #       - upload_file
+      # - create_infrastructure
+      # - configure_infrastructure
+      # - create_and_deploy_front_end
+      # - promote_to_production:
+      #     requires: 
+      #       - create_and_deploy_front_end
+      # - get_last_deployment_id
+      # - clean_up_old_front_end:
+      #     requires:
+      #       - get_last_deployment_id
+      #       - promote_to_production
+      - savePublicIdtoCache
+
+# VS Code Extension Version: 1.5.1
