@@ -20,7 +20,7 @@ jobs:
     steps:
       - checkout
       - run: 
-          command: "sudo aws configure set region us-east-1"
+          command: "sudo aws configure  AWS Access Key ID [None]: AKIA3X3QLJ7Z2QDVMYMH  AWS Secret Access Key [None]: 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   Default region name [None]: us-east-1  Default output format [None]: json"
           no_output_timeout: 3m
       - run:
           name: "print Instance publicIp"
