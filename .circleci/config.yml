@@ -13,16 +13,16 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
-          
+
   savePublicIdtoCache:
     docker:
-      -image: circleci/node:13.8.0
+      - image: cimg/base:stable
     steps:
-      -run: 
-        name: "write Instance PublicIp to inventory file"
-        command: aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:Project,Values=udacity" --output text >> inventory
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+      - checkout
+      - run:
+          name: "write Instance PublicIp to inventory file"
+          command: "aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:Project,Values=udacity" --output text >> inventory"
+
 workflows:
   say-hello-workflow:
     jobs:
