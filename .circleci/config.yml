@@ -19,9 +19,9 @@ jobs:
       - image: cimg/aws:2022.11
     steps:
       - checkout
-      - run: 
-          command: "sudo aws configure  AWS Access Key ID [None]: AKIA3X3QLJ7Z2QDVMYMH  AWS Secret Access Key [None]: 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   Default region name [None]: us-east-1  Default output format [None]: json"
-          no_output_timeout: 3m
+      # - run: 
+      #     command: "sudo aws configure  AWS Access Key ID [None]: AKIA3X3QLJ7Z2QDVMYMH  AWS Secret Access Key [None]: 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   Default region name [None]: us-east-1  Default output format [None]: json"
+      #     no_output_timeout: 3m
       - run:
           name: "print Instance publicIp"
           command: "sudo aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters 'Name=tag:Project,Values=udacity' --output text >> inventory --region us-east-1"
