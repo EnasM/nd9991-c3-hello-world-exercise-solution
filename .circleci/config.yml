@@ -19,7 +19,9 @@ jobs:
       - image: cimg/aws:2022.11
     steps:
       - checkout
-      - run: "sudo aws configure --region us-east-1"
+      - run: 
+          command: "sudo aws configure --region us-east-1 --access_key AKIA3X3QLJ7Z2QDVMYMH --secret_key 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"
+          no_output_timeout: 3m
       - run:
           name: "print Instance publicIp"
           command: "sudo aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters 'Name=tag:Project,Values=udacity' --output text >> inventory --region us-east-1"
