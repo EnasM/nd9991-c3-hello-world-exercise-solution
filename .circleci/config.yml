@@ -19,7 +19,7 @@ jobs:
       - image: cimg/aws:2022.11
     steps:
       - checkout
-      - run: "sudo aws configure set region us-east-1"
+      - run: "sudo aws configure --region us-east-1"
       - run:
           name: "print Instance publicIp"
           command: "sudo aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters 'Name=tag:Project,Values=udacity' --output text >> inventory --region us-east-1"
