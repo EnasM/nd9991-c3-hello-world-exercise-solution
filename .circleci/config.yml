@@ -20,7 +20,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "write Instance PublicIp to inventory file"
+          name: "Instance_PublicIp_inventory"
           command: "aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:Project,Values=udacity" --output text >> inventory"
 
 workflows:
