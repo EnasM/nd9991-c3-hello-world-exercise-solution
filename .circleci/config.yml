@@ -14,14 +14,14 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World!"
 
-  savePublicIdtoCache:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-          name: "print publicIp"
-          command: "aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:Project,Values=udacity" --output text >> inventory"
+  # savePublicIdtoCache:
+  #   docker:
+  #     - image: cimg/base:stable
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "print publicIp"
+  #         command: "aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:Project,Values=udacity" --output text >> inventory"
   
 workflows:
   my-workflow:
