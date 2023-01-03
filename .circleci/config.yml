@@ -16,7 +16,7 @@ jobs:
 
   savePublicIdtoCache:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/aws:2022.11
     steps:
       - checkout
       - run:
