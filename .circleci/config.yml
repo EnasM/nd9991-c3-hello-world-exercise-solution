@@ -26,5 +26,5 @@ jobs:
 workflows:
   my-workflow:
     jobs:
-      - say-hello
+      # - say-hello
       - savePublicIdtoCache
