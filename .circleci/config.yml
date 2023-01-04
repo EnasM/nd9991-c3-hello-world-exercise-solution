@@ -25,9 +25,24 @@ jobs:
       - run:
           name: "print Instance publicIp"
           command: "sudo aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters 'Name=tag:Project,Values=udacity' --output text >> inventory --region us-east-1"
-  
+  create_infrastructure: 
+      docker:
+        - image: amazon/aws-cli
+      steps:
+        - checkout
+        - run:
+            name: Create Cloudformation Stack
+            command: |
+              aws cloudformation deploy \
+                --template-file template.yml \
+                --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+                --region us-east-1
+
 workflows:
   my-workflow:
     jobs:
       # - say-hello
-      - savePublicIdtoCache
+      # - savePublicIdtoCache
+      - create_infrastructure
+
+# VS Code Extension Version: 1.5.1
