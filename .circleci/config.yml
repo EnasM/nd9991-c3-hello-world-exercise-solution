@@ -33,7 +33,7 @@ jobs:
         - run:
             name: Create Cloudformation Stack
             command: |
-              aws cloudformation create-stack \
+              aws cloudformation deploy \
                 --template-body file://template.yml \
                 --stack-name enascloud \
                 --region us-east-1
