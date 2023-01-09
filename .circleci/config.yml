@@ -5,9 +5,10 @@ commands:
    destroy_environment:
      steps:
        - run:
-           name: Destroy environment
-           command: |
-             aws cloudformation delete-stack --stack-name enascloud5
+            name: Destroy environment
+            command: |
+              aws cloudformation delete-stack --stack-name enascloud5
+            when: on_fail
 
 jobs:
   say-hello:
@@ -43,7 +44,7 @@ jobs:
               aws cloudformation deploy --template-file template.yml --stack-name enascloud5 --region us-east-1
         - run: return 1
         - destroy_environment
-          when: on_fail
+
   configure_infrastructure: 
       docker:
         - image: python:3.7-alpine3.11
