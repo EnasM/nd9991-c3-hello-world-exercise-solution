@@ -33,7 +33,7 @@ jobs:
         - run:
             name: Create Cloudformation Stack
             command: |
-              aws cloudformation deploy --template-file template.yml --stack-name enascloud4 --region us-east-1
+              aws cloudformation deploy --template-file template.yml --stack-name enascloud5 --region us-east-1
 
 workflows:
   my-workflow:
