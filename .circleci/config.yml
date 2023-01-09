@@ -35,7 +35,7 @@ jobs:
             command: |
               aws cloudformation deploy \
                 --template-file template.yml \
-                --stack-name enascloud \
+                --stack-name enascloud2 \
                 --region us-east-1
 
 workflows:
