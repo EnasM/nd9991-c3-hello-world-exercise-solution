@@ -34,11 +34,29 @@ jobs:
             name: Create Cloudformation Stack
             command: |
               aws cloudformation deploy --template-file template.yml --stack-name enascloud5 --region us-east-1
+  configure_infrastructure: 
+      docker:
+        - image: python:3.7-alpine3.11
+      steps:
+        - checkout
+        - add_ssh_keys:
+                # You can get this ID in the section where you registered the SSH Key
+                fingerprints: ["84:ac:a5:5b:c7:7a:51:75:f4:2f:52:4f:f9:14:85:0c"] 
+        - run:
+            name: Install Ansible
+            command: |
+              apk add --update ansible
+        - run:
+            name: Run Playbook and Configure server
+            command: |
+              ansible-playbook -i inventory main-remote.yml
+
 
 workflows:
   my-workflow:
     jobs:
       # - savePublicIdtoCache
-      - create_infrastructure
+      # - create_infrastructure
+      - configure_infrastructure
 
 # VS Code Extension Version: 1.5.1
