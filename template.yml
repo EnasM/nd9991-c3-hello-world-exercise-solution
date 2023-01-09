@@ -1,19 +1,26 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: ND9991 C3 L4 
+Parameters: 
+  Param:
+    Type: String
+    Default: ami-0a6b2839d44d781b2
+
 Resources:
   EC2Instance:
-    Type: 'AWS::EC2::Instance'
+    Type: AWS::EC2::Instance
     Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - 0
+        - Fn::GetAZs: "us-east-1"
       SecurityGroups:
         - !Ref InstanceSecurityGroup
-      # Change this, as applicable to you      
       KeyName: EnasKey
-      # Change this, as applicable to you
       # You may need to find out what instance types are available in your region - use https://cloud-images.ubuntu.com/locator/ec2/
       ImageId: 'ami-0a6b2839d44d781b2' 
       InstanceType: t3.micro
   InstanceSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
+    Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Enable SSH access via port 22
       SecurityGroupIngress:
