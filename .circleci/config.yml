@@ -35,7 +35,7 @@ jobs:
             command: |
               aws cloudformation create-stack \
                 --template-body file://template.yml \
-                --stack-name enas_cloud_circle \
+                --stack-name enascloud \
                 --region us-east-1
 
 workflows:
